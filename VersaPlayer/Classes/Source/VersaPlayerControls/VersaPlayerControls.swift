@@ -396,48 +396,50 @@ open class VersaPlayerControls: View {
     
     /// Toggle rewind
     @IBAction open func rewindToggle(sender: Any? = nil) {
-        if handler.player.currentItem?.canPlayFastReverse ?? false {
-            if handler.isRewinding {
-                rewindButton?.set(active: false)
-                handler.player.rate = 1
-                if wasPlayingBeforeRewinding {
-                    handler.play()
-                }else {
-                    handler.pause()
-                }
-            }else {
-                playPauseButton?.set(active: false)
-                rewindButton?.set(active: true)
-                wasPlayingBeforeRewinding = handler.isPlaying
-                if !handler.isPlaying {
-                    handler.play()
-                }
-                handler.player.rate = -1
-            }
-        }
+        self.handler.playbackDelegate?.playbackPreviousBtnTapped(player: self.handler.player)
+//        if handler.player.currentItem?.canPlayFastReverse ?? false {
+//            if handler.isRewinding {
+//                rewindButton?.set(active: false)
+//                handler.player.rate = 1
+//                if wasPlayingBeforeRewinding {
+//                    handler.play()
+//                }else {
+//                    handler.pause()
+//                }
+//            }else {
+//                playPauseButton?.set(active: false)
+//                rewindButton?.set(active: true)
+//                wasPlayingBeforeRewinding = handler.isPlaying
+//                if !handler.isPlaying {
+//                    handler.play()
+//                }
+//                handler.player.rate = -1
+//            }
+//        }
     }
     
     /// Forward toggle
     @IBAction open func forwardToggle(sender: Any? = nil) {
-        if handler.player.currentItem?.canPlayFastForward ?? false {
-            if handler.isForwarding {
-                forwardButton?.set(active: false)
-                handler.player.rate = 1
-                if wasPlayingBeforeForwarding {
-                    handler.play()
-                }else {
-                    handler.pause()
-                }
-            }else {
-                playPauseButton?.set(active: false)
-                forwardButton?.set(active: true)
-                wasPlayingBeforeForwarding = handler.isPlaying
-                if !handler.isPlaying {
-                    handler.play()
-                }
-                handler.player.rate = 2
-            }
-        }
+        self.handler.playbackDelegate?.playbackNextBtnTapped(player: self.handler.player)
+//        if handler.player.currentItem?.canPlayFastForward ?? false {
+//            if handler.isForwarding {
+//                forwardButton?.set(active: false)
+//                handler.player.rate = 1
+//                if wasPlayingBeforeForwarding {
+//                    handler.play()
+//                }else {
+//                    handler.pause()
+//                }
+//            }else {
+//                playPauseButton?.set(active: false)
+//                forwardButton?.set(active: true)
+//                wasPlayingBeforeForwarding = handler.isPlaying
+//                if !handler.isPlaying {
+//                    handler.play()
+//                }
+//                handler.player.rate = 2
+//            }
+//        }
     }
 
 }
