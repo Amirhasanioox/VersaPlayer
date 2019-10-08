@@ -38,6 +38,9 @@ open class VersaPlayer: AVPlayer, AVAssetResourceLoaderDelegate {
     /// VersaPlayer instance
     public weak var handler: VersaPlayerView!
     
+    // For checking to resume after interuption
+    private var forcePause = false
+    
     /// Caption text style rules
     lazy public var captionStyling: VersaPlayerCaptionStyling = {
         return VersaPlayerCaptionStyling(with: self)
@@ -57,6 +60,7 @@ open class VersaPlayer: AVPlayer, AVAssetResourceLoaderDelegate {
     
     /// Play content
     override open func play() {
+        self.forcePause = false
         handler.playbackDelegate?.playbackWillBegin(player: self)
         NotificationCenter.default.post(name: VersaPlayer.VPlayerNotificationName.willPlay.notification, object: self, userInfo: nil)
         if !(handler.playbackDelegate?.playbackShouldBegin(player: self) ?? true) {
@@ -69,6 +73,7 @@ open class VersaPlayer: AVPlayer, AVAssetResourceLoaderDelegate {
     
     /// Pause content
     override open func pause() {
+        self.forcePause = true
         handler.playbackDelegate?.playbackWillPause(player: self)
         NotificationCenter.default.post(name: VersaPlayer.VPlayerNotificationName.pause.notification, object: self, userInfo: nil)
         super.pause()
@@ -171,7 +176,9 @@ extension VersaPlayer {
             if type == .began {
                 self.pause()
             } else {
-                self.play()
+                if !self.forcePause {
+                    self.play()
+                }
             }
         }
     }
