@@ -141,9 +141,9 @@ extension VersaPlayer {
     
     /// Prepare players playback delegate observers
     open func preparePlayerPlaybackDelegate() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.audioSessionGotInterrupted(note:)), name: AVAudioSession.interruptionNotification, object: nil)
       NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
         guard let self = self else { return }
-        NotificationCenter.default.addObserver(self, selector: #selector(self.audioSessionGotInterrupted(note:)), name: AVAudioSession.interruptionNotification, object: nil)
         NotificationCenter.default.post(name: VersaPlayer.VPlayerNotificationName.didEnd.notification, object: self, userInfo: nil)
         self.handler?.playbackDelegate?.playbackDidEnd(player: self)
       }
