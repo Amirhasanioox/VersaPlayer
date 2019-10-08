@@ -164,6 +164,18 @@ open class VersaPlayerView: View, PIPProtocol {
         player.preparePlayerPlaybackDelegate()
         renderingView = VersaPlayerRenderingView(with: self)
         layout(view: renderingView, into: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.audioSessionGotInterrupted(note:)), name: AVAudioSession.interruptionNotification, object: nil)
+    }
+    
+    @objc private func audioSessionGotInterrupted(note: NSNotification) {
+        if let userInfo = note.userInfo, let typeRawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? AVAudioSession.InterruptionType.RawValue {
+            let type = AVAudioSession.InterruptionType(rawValue: typeRawValue)
+            if type == .began {
+                self.pause()
+            } else {
+                //                self.play()
+            }
+        }
     }
     
     /// Layout a view within another view stretching to edges
