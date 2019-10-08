@@ -143,6 +143,7 @@ extension VersaPlayer {
     open func preparePlayerPlaybackDelegate() {
       NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
         guard let self = self else { return }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.audioSessionGotInterrupted(note:)), name: AVAudioSession.interruptionNotification, object: nil)
         NotificationCenter.default.post(name: VersaPlayer.VPlayerNotificationName.didEnd.notification, object: self, userInfo: nil)
         self.handler?.playbackDelegate?.playbackDidEnd(player: self)
       }
@@ -162,6 +163,17 @@ extension VersaPlayer {
       }
 
       addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.new, context: nil)
+    }
+    
+    @objc private func audioSessionGotInterrupted(note: NSNotification) {
+        if let userInfo = note.userInfo, let typeRawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? AVAudioSession.InterruptionType.RawValue {
+            let type = AVAudioSession.InterruptionType(rawValue: typeRawValue)
+            if type == .began {
+                self.pause()
+            } else {
+                self.play()
+            }
+        }
     }
     
     /// Value observer

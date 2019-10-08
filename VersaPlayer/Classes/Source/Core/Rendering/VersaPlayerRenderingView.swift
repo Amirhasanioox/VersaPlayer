@@ -40,8 +40,20 @@ open class VersaPlayerRenderingView: View {
   ///     - player: VersaPlayer instance to render.
   public init(with player: VersaPlayerView) {
     super.init(frame: CGRect.zero)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.appDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     playerLayer.player = player.player
   }
+    
+    private var _player: AVPlayer?
+    @objc private func appDidEnterBackground() {
+        self._player = self.playerLayer.player
+        self.playerLayer.player = nil
+    }
+    @objc private func appWillEnterForeground() {
+        self.playerLayer.player = self._player
+        self._player = nil
+    }
 
   required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
