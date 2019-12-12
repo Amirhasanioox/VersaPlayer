@@ -242,11 +242,6 @@ open class VersaPlayerView: View, PIPProtocol {
             layout(view: self, into: nonFullscreenContainer)
         }
         
-        #if os(iOS)
-        let value = (enabled ? UIInterfaceOrientation.landscapeRight : UIInterfaceOrientation.portrait).rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        #endif
-        
         isFullscreenModeEnabled = enabled
         
         controls?.fullscreenButton?.set(active: isFullscreenModeEnabled)
