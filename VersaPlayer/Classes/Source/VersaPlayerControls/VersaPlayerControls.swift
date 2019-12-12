@@ -300,11 +300,13 @@ open class VersaPlayerControls: View {
     /// Show buffering view
     open func showBuffering() {
         bufferingView?.isHidden = false
+        playPauseButton?.isHidden = true
     }
     
     /// Hide buffering view
     open func hideBuffering() {
         bufferingView?.isHidden = true
+        playPauseButton?.isHidden = false
     }
     
     /// Skip forward (n) seconds in time
