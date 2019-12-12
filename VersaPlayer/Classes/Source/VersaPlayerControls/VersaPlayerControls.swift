@@ -397,7 +397,7 @@ open class VersaPlayerControls: View {
     
     /// Toggle rewind
     @IBAction open func rewindToggle(sender: Any? = nil) {
-        self.handler.playbackDelegate?.playbackPreviousBtnTapped(player: self.handler.player)
+        self.handler.playbackDelegate?.playbackPreviousBtnTapped(playerView: self.handler)
 //        if handler.player.currentItem?.canPlayFastReverse ?? false {
 //            if handler.isRewinding {
 //                rewindButton?.set(active: false)
@@ -421,7 +421,7 @@ open class VersaPlayerControls: View {
     
     /// Forward toggle
     @IBAction open func forwardToggle(sender: Any? = nil) {
-        self.handler.playbackDelegate?.playbackNextBtnTapped(player: self.handler.player)
+        self.handler.playbackDelegate?.playbackNextBtnTapped(playerView: self.handler)
 //        if handler.player.currentItem?.canPlayFastForward ?? false {
 //            if handler.isForwarding {
 //                forwardButton?.set(active: false)
