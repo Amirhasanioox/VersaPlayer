@@ -248,6 +248,8 @@ open class VersaPlayerView: View, PIPProtocol {
         #endif
         
         isFullscreenModeEnabled = enabled
+        
+        controls?.fullscreenButton?.set(active: isFullscreenModeEnabled)
     }
     
     /// Sets the item to be played

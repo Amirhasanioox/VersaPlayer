@@ -93,8 +93,9 @@ public protocol VersaPlayerPlaybackDelegate: class {
     ///     - item: VersaPlayerItem being used
     func playbackItemReady(player: VersaPlayer, item: VersaPlayerItem?)
     
-    func playbackNextBtnTapped(player: VersaPlayer)
-    func playbackPreviousBtnTapped(player: VersaPlayer)
+    func playbackNextBtnTapped(playerView: VersaPlayerView)
+    func playbackPreviousBtnTapped(playerView: VersaPlayerView)
+    func fullscreenBtnTapped(playerView: VersaPlayerView)
     
 }
 
