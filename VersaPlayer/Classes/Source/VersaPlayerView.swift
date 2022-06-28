@@ -223,24 +223,24 @@ open class VersaPlayerView: View, PIPProtocol {
         if enabled == isFullscreenModeEnabled {
             return
         }
-        if enabled {
-            #if os(macOS)
-            if let window = NSApplication.shared.keyWindow {
-                nonFullscreenContainer = superview
-                removeFromSuperview()
-                layout(view: self, into: window.contentView)
-            }
-            #else
-            if let window = UIApplication.shared.keyWindow {
-                nonFullscreenContainer = superview
-                removeFromSuperview()
-                layout(view: self, into: window)
-            }
-            #endif
-        }else {
-            removeFromSuperview()
-            layout(view: self, into: nonFullscreenContainer)
-        }
+//        if enabled {
+//            #if os(macOS)
+//            if let window = NSApplication.shared.keyWindow {
+//                nonFullscreenContainer = superview
+//                removeFromSuperview()
+//                layout(view: self, into: window.contentView)
+//            }
+//            #else
+//            if let window = UIApplication.shared.keyWindow {
+//                nonFullscreenContainer = superview
+//                removeFromSuperview()
+//                layout(view: self, into: window)
+//            }
+//            #endif
+//        }else {
+//            removeFromSuperview()
+//            layout(view: self, into: nonFullscreenContainer)
+//        }
         
         isFullscreenModeEnabled = enabled
         
