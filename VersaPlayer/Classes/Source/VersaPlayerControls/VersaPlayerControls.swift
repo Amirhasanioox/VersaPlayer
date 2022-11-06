@@ -373,7 +373,8 @@ open class VersaPlayerControls: View {
     /// Toggle fullscreen mode
     @IBAction open func toggleFullscreen(sender: Any? = nil) {
         fullscreenButton?.set(active: !handler.isFullscreenModeEnabled)
-        handler.setFullscreen(enabled: !handler.isFullscreenModeEnabled)
+//        handler.setFullscreen(enabled: !handler.isFullscreenModeEnabled)
+        handler.isFullscreenModeEnabled = !handler.isFullscreenModeEnabled
         handler.playbackDelegate?.fullscreenBtnTapped(playerView: handler)
     }
     
